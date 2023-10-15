@@ -11,12 +11,13 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 from tests.data import urls, selectors, valid_data_sets, invalid_data_sets, \
     optional_inputs, inputs_without_special_validation, get_invalid_value, \
-    required_inputs
+    required_inputs, invalid_data_map
 
 
 class GeneralFixturesMixin:
     def setup(self):
         self.browser = webdriver.Chrome()
+        self.browser.implicitly_wait(2)
         self.browser.get(urls['registration_page'])
         self.wait = WebDriverWait(self.browser, timeout=2)
 
@@ -116,12 +117,9 @@ class TestTextInputs(GeneralChecksMixin, GeneralFixturesMixin):
         self.check_form_is_invalid()
 
 
-    invalid_data_tests: tuple[str] = ('value_longer_max_length', 'sql_injection')  # TODO: Refactor this
-
-
     @pytest.mark.xfail
     @pytest.mark.parametrize('text_input_name', inputs_without_special_validation)
-    @pytest.mark.parametrize('test_name', invalid_data_tests)
+    @pytest.mark.parametrize('test_name', invalid_data_map.keys())
     def test_text_input_validation(self, test_name, text_input_name, data_set=valid_data_sets['RU']):
         invalid_value = get_invalid_value(test_name, data_set[text_input_name])
 

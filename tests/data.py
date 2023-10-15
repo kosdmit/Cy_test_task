@@ -128,15 +128,14 @@ invalid_data_sets = {
 }
 
 
+invalid_data_map = {
+    'value_longer_max_length': lambda x: x * 100,
+    'sql_injection': lambda x: "SELECT * FROM news WHERE user='$user'",
+    'xss_injection': lambda x: "<script>alert(123)</script>",
+    'html_injection': lambda x: "<h1>Hello world</h1>",
+
+}
+
 def get_invalid_value(test_name: str, value) -> str:
-    map_dict = {
-        'value_longer_max_length': lambda x: x*100,
-        'sql_injection': lambda x: "SELECT * FROM news WHERE user='$user'",
-        'xss_injection': lambda x: "<script>alert(123)</script>",
-        'html_injection': lambda x: "<h1>Hello world</h1>",
-
-
-    }
-
-    return map_dict[test_name](value)
+    return invalid_data_map[test_name](value)
 
