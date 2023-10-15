@@ -7,7 +7,8 @@ It includes 57 test items which combine different test methods and data for cove
 You can read about included tests here (*at this moment only russian lang*): https://github.com/kosdmit/Cy_test_task/blob/99d09a0e12c96315243673d99d96b5cb1d59c901/docs/check-list.md
 
 ### Features
-- These are easily expandable test cases
+- These are Pytest and Selenium based tests
+- These are easily expandable and updatable test cases
 - It uses `mimesis` package for generating test data
 - It uses parametrization for make code shorter
 
